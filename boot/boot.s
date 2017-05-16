@@ -14,6 +14,17 @@ dd MBOOT_HEADER_MAGIC
 dd MBOOT_HEADER_FLAGS
 dd MBOOT_CHECKSUM
 
+dd 0
+dd 0
+dd 0
+dd 0 
+dd 0
+
+dd 0
+dd 640
+dd 480
+dd 16
+
 [GLOBAL start]
 [GLOBAL glb_mboot_ptr]
 [EXTERN kern_entry]
@@ -25,6 +36,8 @@ start:
     mov ebp, 0
     and esp, 0FFFFFFF0H
     mov [glb_mboot_ptr] , ebx
+
+	push ebx
     call kern_entry
 
 stop:
